@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="#000000"/>
+  </item>
+  <item>
+    <bitmap
+    android:src="@mipmap/SplashScreen"
+    android:tileMode="disabled"/>
+  </item>
+</layer-list>

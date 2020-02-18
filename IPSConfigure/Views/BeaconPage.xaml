@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IPSConfigure.Views.BeaconPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:IPSConfigure.ViewModels"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    mc:Ignorable="d"
+    BackgroundColor="White"
+    Title="{Binding Beacon.Hwid}">
+    <ContentPage.BindingContext>
+        <viewmodels:BeaconViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid Margin="20,27.5,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <material:MaterialLabel
+                    Margin="0,0,0,2"
+                        FontAttributes="Bold"
+                        FontSize="30"
+                        HorizontalOptions="Center"
+                        Text="{Binding Beacon.Hwid}"
+                        TextColor="Black" />
+                <material:MaterialCard Margin="0,4" Padding="16,22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <material:MaterialLabel
+                            Grid.Column="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            HorizontalOptions="Start"
+                            Text="UUID: "
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <material:MaterialLabel
+                            Grid.Column="1"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="{Binding Beacon.Uuid}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </material:MaterialCard>
+                <material:MaterialCard Margin="0,4" Padding="16,22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <material:MaterialLabel
+                            Grid.Column="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            HorizontalOptions="Start"
+                            Text="Group: "
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <material:MaterialLabel
+                            Grid.Column="1"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="{Binding Beacon.MinorMajorString}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </material:MaterialCard>
+                <material:MaterialCard Margin="0,4" Padding="16,22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <material:MaterialLabel
+                            Grid.Column="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            HorizontalOptions="Start"
+                            Text="Rooms: "
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <material:MaterialLabel
+                            Grid.Column="1"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="{Binding Beacon.RoomsString}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </material:MaterialCard>
+                <material:MaterialCard Margin="0,4" Padding="16,22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <material:MaterialLabel
+                            Grid.Column="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            HorizontalOptions="Start"
+                            Text="Rssi: "
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <material:MaterialLabel
+                            Grid.Column="1"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="{Binding Beacon.RssiAverage}"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+                    </Grid>
+                </material:MaterialCard>
+            </StackLayout>
+            <ContentView>
+                <material:MaterialLabel
+                Margin="0,0,0,20"
+                HorizontalTextAlignment="Center"
+                Text="{Binding UserId}">
+                </material:MaterialLabel>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.UserIdCommand}"
+                        CommandParameter="{Binding UserId}"
+                        NumberOfTapsRequired="1" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

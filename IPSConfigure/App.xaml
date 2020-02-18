@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:material="clr-namespace:XF.Material.Forms.Resources;assembly=XF.Material"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="IPSConfigure.App"
+             mc:Ignorable="d">
+    <Application.Resources>
+
+        <Color x:Key="PrimaryTextColor">#212121</Color>
+        <Color x:Key="SecondaryTextColor">#757575</Color>
+        <Color x:Key="RegularyTextColor">#FFFFFF</Color>
+
+        <material:MaterialColorConfiguration
+            x:Key="Material.Color"
+            Background="#FFFFFF"
+            Error="#B00020"
+            OnBackground="#000000"
+            OnError="#FFFFFF"
+            OnPrimary="#FFFFFF"
+            OnSecondary="#FFFFFF"
+            OnSurface="#000000"
+            Primary="#607D8B"
+            PrimaryVariant="#455A64"
+            Secondary="#3f51b5"
+            SecondaryVariant="#002984"
+            Surface="#FFFFFF" />
+
+        <material:MaterialConfiguration x:Key="Material.Configuration" ColorConfiguration="{StaticResource Material.Color}" />
+    </Application.Resources>
+</Application>

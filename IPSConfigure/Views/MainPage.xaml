@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IPSConfigure.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:IPSConfigure.ViewModels"
+    x:Name="Root"
+    mc:Ignorable="d"
+    BackgroundColor="White"
+    Title="Dashboard">
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                Margin="20,20,20,70"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Models}"
+                SelectionMode="None"
+                SeparatorVisibility="None">
+                <ListView.Header>
+                    <StackLayout
+                        HeightRequest="56"
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                        <material:MaterialMenuButton
+                            Padding="0"
+                            Choices="{Binding ListActions}"
+                            HorizontalOptions="Start"
+                            Command="{Binding ListMenuCommand}"
+                            VerticalOptions="Center" 
+                            Image="ic_overflow"
+                            TintColor="#AE000000"
+                            BackgroundColor="Transparent"/>
+                        <material:MaterialLabel
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            HorizontalOptions="Center"
+                            Text="Your Rooms"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <material:MaterialCard Margin="0,4" Padding="16,8">
+                                <View.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.RoomSelectedCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        NumberOfTapsRequired="1" />
+                                </View.GestureRecognizers>
+                                <StackLayout HeightRequest="56" Orientation="Horizontal">
+                                    <material:MaterialLabel
+                                        FontSize="20"
+                                        Text="{Binding Title}"
+                                        TextColor="Black"
+                                        VerticalOptions="FillAndExpand"
+                                        VerticalTextAlignment="Center" />
+                                    <StackLayout
+                                        HorizontalOptions="EndAndExpand"
+                                        Orientation="Horizontal"
+                                        Spacing="20">
+                                        <material:MaterialCard
+                                            Padding="8,2"
+                                            BackgroundColor="#4CAF50"
+                                            CornerRadius="2"
+                                            Elevation="1"
+                                            IsVisible="{Binding IsConfigured}"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Style="{DynamicResource Material.TypeScale.Overline}"
+                                                Text="Configured"
+                                                TextColor="#DEFFFFFF" />
+                                        </material:MaterialCard>
+                                        <material:MaterialCard
+                                            IsVisible="{Binding IsUnsaved}"
+                                            Padding="8,2"
+                                            BackgroundColor="#AF4B4B"
+                                            CornerRadius="2"
+                                            Elevation="1"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Style="{DynamicResource Material.TypeScale.Overline}"
+                                                Text="Unsaved"
+                                                TextColor="#DEFFFFFF" />
+                                        </material:MaterialCard>
+                                        <material:MaterialMenuButton
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Choices="{Binding Source={x:Reference Root}, Path=BindingContext.Actions}"
+                                            HorizontalOptions="End"
+                                            Command="{Binding Source={x:Reference Root}, Path=BindingContext.MenuCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            VerticalOptions="Center"
+                                            Image="ic_overflow"
+                                            TintColor="#AE000000"
+                                            BackgroundColor="Transparent"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </material:MaterialCard>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ContentView>
+                <material:MaterialLabel
+                Margin="0,0,0,20"
+                HorizontalTextAlignment="Center"
+                Text="{Binding UserId}">
+                </material:MaterialLabel>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.UserIdCommand}"
+                        CommandParameter="{Binding UserId}"
+                        NumberOfTapsRequired="1" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
