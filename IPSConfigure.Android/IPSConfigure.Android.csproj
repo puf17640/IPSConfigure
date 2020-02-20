@@ -34,11 +34,6 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidDexTool>dx</AndroidDexTool>
     <MandroidI18n />
@@ -62,12 +57,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
-    <Reference Include="UniversalBeacon.Library.Android">
-      <HintPath>..\..\UniversalBeaconLibrary\UniversalBeacon.Library.Android\bin\Release\UniversalBeacon.Library.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="UniversalBeacon.Library.Core">
-      <HintPath>..\..\UniversalBeaconLibrary\UniversalBeacon.Library.Android\bin\Release\UniversalBeacon.Library.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
@@ -106,14 +95,42 @@
     <AndroidResource Include="Resources\layout\Toolbar.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\mipmap-mdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\mipmap-hdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IPSConfigure\IPSConfigure.csproj">
-      <Project>{74D8E5D7-51DE-499A-9867-F9D528C88E93}</Project>
+      <Project>{02E32F1E-2719-4AE6-8E8A-41853B4F0F79}</Project>
       <Name>IPSConfigure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalBeacon.Library.Android\UniversalBeacon.Library.Android.csproj">
+      <Project>{6ADC54D4-3B9B-495E-A2B8-F9CF5FD623CE}</Project>
+      <Name>UniversalBeacon.Library.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalBeacon.Library.Core\UniversalBeacon.Library.Core.csproj">
+      <Project>{39EA3C64-A24C-4F7C-89D0-03ED9C6D6B38}</Project>
+      <Name>UniversalBeacon.Library.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -135,21 +152,6 @@
     <AndroidResource Include="Resources\drawable\splashscreen.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

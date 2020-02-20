@@ -57,7 +57,7 @@
     </CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
     <MtouchInterpreter>-all</MtouchInterpreter>
-    <CodesignProvision />
+    <CodesignProvision>iOS Team Provisioning Profile: at.spengergasse.IPSConfigure</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
   </PropertyGroup>
@@ -92,12 +92,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="UniversalBeacon.Library.Core">
-      <HintPath>..\..\UniversalBeaconLibrary\UniversalBeacon.Library.iOS\bin\Release\UniversalBeacon.Library.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="UniversalBeacon.Library.iOS">
-      <HintPath>..\..\UniversalBeaconLibrary\UniversalBeacon.Library.iOS\bin\Release\UniversalBeacon.Library.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.iOS" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
@@ -124,8 +118,16 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\IPSConfigure\IPSConfigure.csproj">
-      <Project>{74D8E5D7-51DE-499A-9867-F9D528C88E93}</Project>
+      <Project>{02E32F1E-2719-4AE6-8E8A-41853B4F0F79}</Project>
       <Name>IPSConfigure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalBeacon.Library.Core\UniversalBeacon.Library.Core.csproj">
+      <Project>{39EA3C64-A24C-4F7C-89D0-03ED9C6D6B38}</Project>
+      <Name>UniversalBeacon.Library.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalBeacon.Library.iOS\UniversalBeacon.Library.iOS.csproj">
+      <Project>{430362FE-C759-4D51-890F-1BF8308FC99F}</Project>
+      <Name>UniversalBeacon.Library.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -144,60 +146,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-1201.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-401.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-402.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-581.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-801.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\SplashScreen.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -210,5 +158,23 @@
     <ImageAsset Include="Assets.xcassets\SplashScreen.imageset\SplashScreen@3x1.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-60-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-87-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-180-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-20-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-29-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-40-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-152-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-167-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-1024-1.png" />
   </ItemGroup>
 </Project>

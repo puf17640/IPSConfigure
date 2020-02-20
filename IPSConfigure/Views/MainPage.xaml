@@ -51,7 +51,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <material:MaterialCard Margin="0,4" Padding="16,8">
+                            <material:MaterialCard Margin="0,4" Padding="16,8" >
                                 <View.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.RoomSelectedCommand}"

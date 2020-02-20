@@ -14,7 +14,7 @@ namespace IPSConfigure.Views
             InitializeComponent();
             (BindingContext as ConfigureRoomViewModel).SetRoom(model);
 
-            if (Device.RuntimePlatform == "Android")
+            //if (Device.RuntimePlatform == "Android")
                 NavigationPage.SetHasNavigationBar(this, false);
 
             SharedTransitionNavigationPage.SetTransitionDuration(this, 500);

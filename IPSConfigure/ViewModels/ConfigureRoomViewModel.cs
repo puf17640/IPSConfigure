@@ -26,11 +26,10 @@ namespace IPSConfigure.ViewModels
             Models = new ObservableCollection<Models.Beacon>();
             App.BLEAdapter.AdvertisementPacketReceived += (object s, BLEAdvertisementPacketArgs e) =>
             {
-                var data = e.Data;
-                var bluetoothAddress = string.Join(":", BitConverter.GetBytes(data.BluetoothAddress).Reverse().Select(b => b.ToString("X2"))).Substring(6);
+                var bluetoothAddress = string.Join(":", BitConverter.GetBytes(e.Data.BluetoothAddress).Reverse().Select(b => b.ToString("X2"))).Substring(6);
                 if (!Room.Beacons.Any(b => b.Hwid.Equals(bluetoothAddress)))
                     return;
-                Room.Beacons.Where(b => b.Hwid.Equals(bluetoothAddress)).FirstOrDefault().RssiHistory.Add(data.RawSignalStrengthInDBm);
+                Room.Beacons.FirstOrDefault(b => b.Hwid.Equals(bluetoothAddress)).RssiHistory.Add(e.Data.RawSignalStrengthInDBm);
             };
         }
 
@@ -52,7 +51,7 @@ namespace IPSConfigure.ViewModels
 
         public string[] Actions => new string[] { "Remove" };
 
-        public string[] ListActions => new string[] { "Search", "Clear", "Save" };
+        public string[] ListActions => new string[] { "Search", "Clear", "Save", "Back" };
 
         public ICommand JobSelectedCommand => new Command<string>(async (s) =>
         {
@@ -64,8 +63,8 @@ namespace IPSConfigure.ViewModels
         public ICommand UserIdCommand => new Command<string>(async (s) =>
         {
             await Clipboard.SetTextAsync(s);
-            await MaterialDialog.Instance.SnackbarAsync(message: "UserId copied to clipboard.",
-                                                msDuration: MaterialSnackbar.DurationShort, new MaterialSnackbarConfiguration()
+            await MaterialDialog.Instance.SnackbarAsync("UserId copied to clipboard.",
+                                                MaterialSnackbar.DurationShort, new MaterialSnackbarConfiguration
                                                 {
                                                     CornerRadius = 15f,
                                                     Margin = new Thickness(20, 0, 20, 20)
@@ -78,6 +77,9 @@ namespace IPSConfigure.ViewModels
                 return;
             switch (ListActions[s.Index])
             {
+                case "Back":
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    break;
                 case "Search":
                     if (Room.IsConfigured || HasConfig && (await MaterialDialog.Instance.ConfirmAsync("Are you sure you want to delete the current configuration and create a new one?", "New Configuration", "Yes", "No")).GetValueOrDefault())
                         await DeleteConfigAsync();
