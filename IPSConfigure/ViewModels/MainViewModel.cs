@@ -92,7 +92,7 @@ namespace IPSConfigure.ViewModels
                     }
                     break;
                 case "Sort":
-                    this.Models = new ObservableCollection<Room>(DataStore.Instance.Rooms.OrderBy(m => m.Title));
+                    Models = new ObservableCollection<Room>(DataStore.Instance.Rooms.OrderBy(m => m.Title));
                     await MaterialDialog.Instance.SnackbarAsync(message: "Rooms sorted.",
                                             msDuration: MaterialSnackbar.DurationShort, new MaterialSnackbarConfiguration()
                                             {

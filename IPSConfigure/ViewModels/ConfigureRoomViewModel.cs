@@ -51,11 +51,11 @@ namespace IPSConfigure.ViewModels
 
         public string[] Actions => new string[] { "Remove" };
 
-        public string[] ListActions => new string[] { "Search", "Clear", "Save", "Back" };
+        public string[] ListActions => new string[] { "Search", "Clear", "Save" };
 
         public ICommand JobSelectedCommand => new Command<string>(async (s) =>
         {
-            var selectedModel = this.Models.FirstOrDefault(m => m.Hwid == s);
+            var selectedModel = Models.FirstOrDefault(m => m.Hwid == s);
             var x = new BeaconPage(selectedModel);
             await Application.Current.MainPage.Navigation.PushAsync(x);
         });
@@ -77,9 +77,6 @@ namespace IPSConfigure.ViewModels
                 return;
             switch (ListActions[s.Index])
             {
-                case "Back":
-                    await Application.Current.MainPage.Navigation.PopAsync();
-                    break;
                 case "Search":
                     if (Room.IsConfigured || HasConfig && (await MaterialDialog.Instance.ConfirmAsync("Are you sure you want to delete the current configuration and create a new one?", "New Configuration", "Yes", "No")).GetValueOrDefault())
                         await DeleteConfigAsync();
@@ -89,28 +86,29 @@ namespace IPSConfigure.ViewModels
                 case "Clear":
                     if ((await MaterialDialog.Instance.ConfirmAsync("Are you sure you want to delete the current configuration?", "Delete Configuration", "Yes", "No")).GetValueOrDefault())
                     {
-                        using (var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Deleting configuration for '{Room.Title}'"))
+                        using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Deleting configuration for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
                         {
-                            var success = false;
-                            try
+                            ScrimColor = Color.FromHex("#000")
+                        });
+                        var success = false;
+                        try
+                        {
+                            success = await DeleteConfigAsync();
+                            if (success)
                             {
-                                success = await DeleteConfigAsync();
-                                if (success)
-                                {
-                                    Models.Clear();
-                                    Room.IsUnsaved = (!Room.IsConfigured && Models.Count > 0) || (Room.IsConfigured && !(Models.Count == Room.Beacons.Count && Models.All(b => Room.Beacons.Contains(b))));
-                                    Room.UnsavedState = null;
-                                }
+                                Models.Clear();
+                                Room.IsUnsaved = (!Room.IsConfigured && Models.Count > 0) || (Room.IsConfigured && !(Models.Count == Room.Beacons.Count && Models.All(b => Room.Beacons.Contains(b))));
+                                Room.UnsavedState = null;
                             }
-                            catch
-                            {
-                                success = false;
-                            }
-                            finally
-                            {
-                                loadingDialog.MessageText = success ? "Done!" : "An error occurred, please try again.";
-                                await Task.Delay(3000);
-                            }
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                        finally
+                        {
+                            loadingDialog.MessageText = success ? "Done!" : "An error occurred, please try again.";
+                            await Task.Delay(3000);
                         }
                     }
                     break;
@@ -118,28 +116,29 @@ namespace IPSConfigure.ViewModels
                 case "Save":
                     if (HasConfig)
                     {
-                        using (var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Saving configuration for '{Room.Title}'"))
+                        using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Saving configuration for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
                         {
-                            var success = false;
-                            try
+                            ScrimColor = Color.FromHex("#000")
+                        });
+                        var success = false;
+                        try
+                        {
+                            success = await SaveConfigAsync();
+                            if (success)
                             {
-                                success = await SaveConfigAsync();
-                                if (success)
-                                {
-                                    Models = new ObservableCollection<Models.Beacon>(Room.Beacons);
-                                }
-                                Room.IsUnsaved = (!Room.IsConfigured && Models.Count > 0) || (Room.IsConfigured && !(Models.Count == Room.Beacons.Count && Models.All(b => Room.Beacons.Contains(b))));
-                                Room.UnsavedState = Models.Count > 0 ? Models : null;
+                                Models = new ObservableCollection<Models.Beacon>(Room.Beacons);
                             }
-                            catch
-                            {
-                                success = false;
-                            }
-                            finally
-                            {
-                                loadingDialog.MessageText = success ? "Done!" : "An error occurred, please try again.";
-                                await Task.Delay(3000);
-                            }
+                            Room.IsUnsaved = (!Room.IsConfigured && Models.Count > 0) || (Room.IsConfigured && !(Models.Count == Room.Beacons.Count && Models.All(b => Room.Beacons.Contains(b))));
+                            Room.UnsavedState = Models.Count > 0 ? Models : null;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                        finally
+                        {
+                            loadingDialog.MessageText = success ? "Done!" : "An error occurred, please try again.";
+                            await Task.Delay(3000);
                         }
                     }
                     else
@@ -194,28 +193,29 @@ namespace IPSConfigure.ViewModels
 
         private async Task StartConfigurationAsync()
         {
-            using (var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Gathering data for '{Room.Title}'"))
+            using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Gathering data for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
             {
-                try
-                {
-                    App.BLEAdapter.Beacons.Clear();
-                    App.BLEAdapter.BeaconAdded += AddBeacon;
-                    await App.BLEAdapter.StartAsync();
-                    loadingDialog.MessageText = Models.Count > 0 ? "Done!" : "Couldnt get enough data, please try again.";
-                }
-                catch (NullReferenceException)
-                {
-                    loadingDialog.MessageText = "It seems you have bluetooth disabled, please enable bluetooth and try again.";
-                }
-                catch (Exception)
-                {
-                    loadingDialog.MessageText = "An error occurred, please try again.";
-                }
-                finally
-                {
-                    App.BLEAdapter.BeaconAdded -= AddBeacon;
-                    await Task.Delay(3000);
-                }
+                ScrimColor = Color.FromHex("#000")
+            });
+            try
+            {
+                App.BLEAdapter.Beacons.Clear();
+                App.BLEAdapter.BeaconAdded += AddBeacon;
+                await App.BLEAdapter.StartAsync();
+                loadingDialog.MessageText = Models.Count > 0 ? "Done!" : "Couldnt get enough data, please try again.";
+            }
+            catch (NullReferenceException)
+            {
+                loadingDialog.MessageText = "It seems you have bluetooth disabled, please enable bluetooth and try again.";
+            }
+            catch (Exception)
+            {
+                loadingDialog.MessageText = "An error occurred, please try again.";
+            }
+            finally
+            {
+                App.BLEAdapter.BeaconAdded -= AddBeacon;
+                await Task.Delay(3000);
             }
         }
 
