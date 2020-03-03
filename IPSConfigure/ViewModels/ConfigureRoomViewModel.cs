@@ -88,7 +88,8 @@ namespace IPSConfigure.ViewModels
                     {
                         using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Deleting configuration for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
                         {
-                            ScrimColor = Color.FromHex("#000")
+                            ScrimColor = Color.FromHex("#66000000"),
+                            TintColor = Color.FromHex("#000")
                         });
                         var success = false;
                         try
@@ -118,7 +119,8 @@ namespace IPSConfigure.ViewModels
                     {
                         using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Saving configuration for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
                         {
-                            ScrimColor = Color.FromHex("#000")
+                            ScrimColor = Color.FromHex("#66000000"),
+                            TintColor = Color.FromHex("#000")
                         });
                         var success = false;
                         try
@@ -195,7 +197,8 @@ namespace IPSConfigure.ViewModels
         {
             using var loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: $"Gathering data for '{Room.Title}'", configuration: new MaterialLoadingDialogConfiguration()
             {
-                ScrimColor = Color.FromHex("#000")
+                ScrimColor = Color.FromHex("#66000000"),
+                TintColor = Color.FromHex("#000")
             });
             try
             {

@@ -26,7 +26,7 @@ namespace IPSConfigure.Services
 
         public ObservableCollection<Beacon> Beacons => manager.BluetoothBeacons;
 
-        public async Task StartAsync(int timeout = 10000)
+        public async Task StartAsync(int timeout = 30000)
         {
             manager?.Start();
             await Task.Delay(timeout).ContinueWith((t) => Stop());
